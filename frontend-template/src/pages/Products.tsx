@@ -7,7 +7,7 @@ const products: ProductProps[] = [
 		name: "Guitarra",
 		brand: "Brand",
 		price: 999,
-		slug: "product-slug",
+		slug: "",
 		img_url:
 			"https://www.el-atril.com/orquesta/Instrumentos/imagenes/guitarra.jpg",
 	},
@@ -15,7 +15,7 @@ const products: ProductProps[] = [
 		name: "Zapatos",
 		brand: "Brand",
 		price: 999,
-		slug: "product-slug",
+		slug: "",
 		img_url:
 			"https://gestion.pe/resizer/CNx8YN7g4JT40BmznY5bZVWkesk=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MTAKNCOMFBFB5ND7G7SMSBOKHU.jpg",
 	},
@@ -23,7 +23,7 @@ const products: ProductProps[] = [
 		name: "Guitarra",
 		brand: "Brand",
 		price: 999,
-		slug: "product-slug",
+		slug: "",
 		img_url:
 			"https://www.el-atril.com/orquesta/Instrumentos/imagenes/guitarra.jpg",
 	},
@@ -31,7 +31,7 @@ const products: ProductProps[] = [
 		name: "Zapatos",
 		brand: "Brand",
 		price: 999,
-		slug: "product-slug",
+		slug: "",
 		img_url:
 			"https://gestion.pe/resizer/CNx8YN7g4JT40BmznY5bZVWkesk=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MTAKNCOMFBFB5ND7G7SMSBOKHU.jpg",
 	},
@@ -39,7 +39,7 @@ const products: ProductProps[] = [
 		name: "Guitarra",
 		brand: "Brand",
 		price: 999,
-		slug: "product-slug",
+		slug: "",
 		img_url:
 			"https://www.el-atril.com/orquesta/Instrumentos/imagenes/guitarra.jpg",
 	},
@@ -47,7 +47,7 @@ const products: ProductProps[] = [
 		name: "Zapatos",
 		brand: "Brand",
 		price: 999,
-		slug: "product-slug",
+		slug: "",
 		img_url:
 			"https://gestion.pe/resizer/CNx8YN7g4JT40BmznY5bZVWkesk=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MTAKNCOMFBFB5ND7G7SMSBOKHU.jpg",
 	},
@@ -55,7 +55,7 @@ const products: ProductProps[] = [
 		name: "Guitarra",
 		brand: "Brand",
 		price: 999,
-		slug: "product-slug",
+		slug: "",
 		img_url:
 			"https://www.el-atril.com/orquesta/Instrumentos/imagenes/guitarra.jpg",
 	},
@@ -63,7 +63,7 @@ const products: ProductProps[] = [
 		name: "Zapatos",
 		brand: "Brand",
 		price: 999,
-		slug: "product-slug",
+		slug: "",
 		img_url:
 			"https://gestion.pe/resizer/CNx8YN7g4JT40BmznY5bZVWkesk=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MTAKNCOMFBFB5ND7G7SMSBOKHU.jpg",
 	},

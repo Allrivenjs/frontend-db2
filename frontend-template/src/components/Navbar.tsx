@@ -32,13 +32,13 @@ const Navbar = () => {
 				<nav className="mt-1">
 					<Link
 						className="hover:underline text-slate-500 mr-3 text-sm"
-						to="/"
+						to="/login"
 					>
 						Iniciar sesión
 					</Link>
 					<Link
 						className="hover:underline text-white mr-3 text-sm bg-blue-400 px-3 py-2 rounded-md font-bold hover:bg-blue-600 transition-colors"
-						to="/products"
+						to="/register"
 					>
 						Registrarse
 					</Link>

@@ -1,8 +1,18 @@
 import { Container, Heading } from "@chakra-ui/react";
+import { useState } from "react";
 
 import { FiPlus, FiMinus } from "react-icons/fi";
 
 const Product = () => {
+	const [counter, setCounter] = useState<number>(1);
+
+	const addCounter = () => setCounter(counter + 1);
+
+	const substractCounter = () => {
+		setCounter(counter - 1);
+		if (counter < 2) setCounter(1);
+	};
+
 	return (
 		<article className="flex flex-col items-center gap-8 pt-32 pb-32">
 			<section className="flex w-3/4 gap-8">
@@ -33,14 +43,20 @@ const Product = () => {
 					<div className="mt-4">
 						<p className="mb-2 text-sm">Cantidad:</p>
 						<div className="flex border border-slate-200 w-fit items-center rounded-lg">
-							<button className="w-10 h-10 flex justify-center items-center p-1 bg-blue-400 rounded-l-lg">
-								<FiPlus color="white" />
+							<button
+								onClick={substractCounter}
+								className="w-10 h-10 flex justify-center items-center p-1 bg-slate-300 rounded-l-lg"
+							>
+								<FiMinus />
 							</button>
 							<div className="w-10 h-10 flex justify-center items-center">
-								1
+								{counter}
 							</div>
-							<button className="w-10 h-10 flex justify-center items-center p-1 bg-blue-400 rounded-r-lg">
-								<FiMinus color="white" />
+							<button
+								onClick={addCounter}
+								className="w-10 h-10 flex justify-center items-center p-1 bg-slate-300 rounded-r-lg"
+							>
+								<FiPlus />
 							</button>
 						</div>
 					</div>
