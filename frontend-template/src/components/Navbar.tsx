@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
 	return (
-		<div className="w-full h-16 bg-white shadow-md px-4 flex items-center justify-between">
+		<div className="w-full h-16 bg-white shadow-md px-4 flex items-center justify-between fixed z-50">
 			<div className="flex items-center h-full">
-				<div className="font-bold text-xl mr-6">Logo</div>
+				<div className="font-bold text-xl mr-6">
+					💅 Logo
+				</div>
 				<nav className="mt-1">
 					<Link
 						className="hover:underline text-slate-500 mr-3 text-sm"
