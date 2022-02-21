@@ -64,7 +64,7 @@ const Navbar = () => {
 							className="hover:underline text-white mr-3 text-sm"
 							to="/products"
 						>
-							Accesorios
+							Productos
 						</Link>
 						<Link
 							className="hover:underline text-white mr-3 text-sm"

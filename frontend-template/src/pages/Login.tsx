@@ -12,14 +12,16 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface LoginUserState {
 	email: string;
 	password: string;
-};
+}
 
 const Login = () => {
+	const navigate = useNavigate();
+
 	const [loading, setLoading] = useState(false);
 
 	const [user, setUser] = useState<LoginUserState>({
@@ -36,7 +38,25 @@ const Login = () => {
 
 	const handleOnSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log("sending form", user);
+		const { email, password } = user;
+		let datosEnviar = {
+			usuario: email,
+			contrasena: password,
+		};
+		fetch("http://localhost:8000/api/login", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(datosEnviar),
+		})
+			.then((respuesta) => {
+				if(respuesta.status===200){
+					navigate("/");
+				}else{
+					console.log("no");
+					
+				}
+			})
+			.catch(console.log);
 	};
 
 	return (
@@ -57,14 +77,14 @@ const Login = () => {
 				<Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
 					<form onSubmit={handleOnSubmitForm}>
 						<Stack spacing={4}>
-							<FormControl id="email">
-								<FormLabel htmlFor="email">
+							<FormControl id="text">
+								<FormLabel htmlFor="text">
 									Correo electronico
 								</FormLabel>
 								<Input
 									onChange={handleOnChangeInput}
 									name="email"
-									type="email"
+									type="text"
 									required
 									autoComplete={"email"}
 									autoFocus

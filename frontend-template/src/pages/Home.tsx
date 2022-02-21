@@ -1,121 +1,93 @@
+import { useEffect, useState } from "react";
 import Merch from "../components/merch";
 
+interface Productito {
+	nombre: string;
+	URL: string;
+}
+
+interface ProductitoState {
+	data: Productito[];
+}
+
 const Home = () => {
+	const [state, setState] = useState<ProductitoState>({ data: [] });
+
+	useEffect(() => {
+		const data = async () => {
+			const response = await fetch("http://localhost:8000/api/products");
+			const data = await response.json();
+			setState({ data: data });
+		};
+
+		data();
+	}, []);
+
 	return (
 		<>
-			<div className="pt-28 flex flex-col items-center">
-				<h2 className="text-4xl mb-10">
-					Articulos en venta de la estación de invierno
-				</h2>
-				<div className="grid grid-cols-3">
-					<Merch
-						name={"Sueter"}
-						image={
-							"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-						}
-						desc={"Con mangas"}
-						color={"Negro"}
-					/>
-					<Merch
-						name={"Sueter"}
-						image={
-							"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-						}
-						desc={"Con mangas"}
-						color={"Negro"}
-					/>
-					<Merch
-						name={"Sueter"}
-						image={
-							"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-						}
-						desc={"Con mangas"}
-						color={"Negro"}
-					/>
-					<Merch
-						name={"Sueter"}
-						image={
-							"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-						}
-						desc={"Con mangas"}
-						color={"Negro"}
-					/>
-					<Merch
-						name={"Sueter"}
-						image={
-							"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-						}
-						desc={"Con mangas"}
-						color={"Negro"}
-					/>
-					<Merch
-						name={"Sueter"}
-						image={
-							"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-						}
-						desc={"Con mangas"}
-						color={"Negro"}
-					/>
-					<Merch
-						name={"Sueter"}
-						image={
-							"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-						}
-						desc={"Con mangas"}
-						color={"Negro"}
-					/>
-					<Merch
-						name={"Sueter"}
-						image={
-							"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-						}
-						desc={"Con mangas"}
-						color={"Negro"}
-					/>
-				</div>
-				<section className="flex flex-col items-center w-full">
-					<h2 className="text-4xl font-bold mb-5">
-						Oferta de invierno especial
+			{state.data ? (
+				<div className="pt-28 flex flex-col items-center">
+					<h2 className="text-4xl mb-10">
+						Articulos en venta de la estación de invierno
 					</h2>
-
-					<p className="font-bold mb-5">Calzado para la nieve</p>
-					<hr className="border border-gray-300 w-11/12" />
-
 					<div className="grid grid-cols-3">
-					<Merch
-						name={"Sueter"}
-						image={
-							"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-						}
-						desc={"Con mangas"}
-						color={"Negro"}
-					/>
-					<Merch
-						name={"Sueter"}
-						image={
-							"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-						}
-						desc={"Con mangas"}
-						color={"Negro"}
-					/><Merch
-					name={"Sueter"}
-					image={
-						"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-					}
-					desc={"Con mangas"}
-					color={"Negro"}
-				/>
-				<Merch
-					name={"Sueter"}
-					image={
-						"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-					}
-					desc={"Con mangas"}
-					color={"Negro"}
-				/>
+						{state.data.map((element, i) => {
+							return (
+								<Merch
+									key={i}
+									name={element.nombre}
+									image={element.URL}
+								/>
+							);
+						})}
 					</div>
-				</section>
-			</div>
+					<section className="flex flex-col items-center w-full">
+						<h2 className="text-4xl font-bold mb-5">
+							Oferta de invierno especial
+						</h2>
+
+						<p className="font-bold mb-5">Calzado para la nieve</p>
+						<hr className="border border-gray-300 w-11/12" />
+
+						<div className="grid grid-cols-3">
+							<Merch
+								name={"Sueter"}
+								image={
+									"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
+								}
+								desc={"Con mangas"}
+								color={"Negro"}
+							/>
+							<Merch
+								name={"Sueter"}
+								image={
+									"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
+								}
+								desc={"Con mangas"}
+								color={"Negro"}
+							/>
+							<Merch
+								name={"Sueter"}
+								image={
+									"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
+								}
+								desc={"Con mangas"}
+								color={"Negro"}
+							/>
+							<Merch
+								name={"Sueter"}
+								image={
+									"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
+								}
+								desc={"Con mangas"}
+								color={"Negro"}
+							/>
+						</div>
+					</section>
+				</div>
+			) : (
+				<div>Cargando</div>
+			)}
 		</>
 	);
 };

@@ -1,13 +1,14 @@
 import { Container, Grid, GridItem, Heading } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../components/shared/Pagination";
-
+/*
 const products: ProductProps[] = [
 	{
 		name: "Guitarra",
 		brand: "Brand",
 		price: 999,
-		slug: "",
+		id: 1,
 		img_url:
 			"https://www.el-atril.com/orquesta/Instrumentos/imagenes/guitarra.jpg",
 	},
@@ -15,7 +16,7 @@ const products: ProductProps[] = [
 		name: "Zapatos",
 		brand: "Brand",
 		price: 999,
-		slug: "",
+		id: 1,
 		img_url:
 			"https://gestion.pe/resizer/CNx8YN7g4JT40BmznY5bZVWkesk=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MTAKNCOMFBFB5ND7G7SMSBOKHU.jpg",
 	},
@@ -23,7 +24,7 @@ const products: ProductProps[] = [
 		name: "Guitarra",
 		brand: "Brand",
 		price: 999,
-		slug: "",
+		id: 1,
 		img_url:
 			"https://www.el-atril.com/orquesta/Instrumentos/imagenes/guitarra.jpg",
 	},
@@ -31,7 +32,7 @@ const products: ProductProps[] = [
 		name: "Zapatos",
 		brand: "Brand",
 		price: 999,
-		slug: "",
+		id: 1,
 		img_url:
 			"https://gestion.pe/resizer/CNx8YN7g4JT40BmznY5bZVWkesk=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MTAKNCOMFBFB5ND7G7SMSBOKHU.jpg",
 	},
@@ -39,7 +40,7 @@ const products: ProductProps[] = [
 		name: "Guitarra",
 		brand: "Brand",
 		price: 999,
-		slug: "",
+		id: 1,
 		img_url:
 			"https://www.el-atril.com/orquesta/Instrumentos/imagenes/guitarra.jpg",
 	},
@@ -47,7 +48,7 @@ const products: ProductProps[] = [
 		name: "Zapatos",
 		brand: "Brand",
 		price: 999,
-		slug: "",
+		id: 1,
 		img_url:
 			"https://gestion.pe/resizer/CNx8YN7g4JT40BmznY5bZVWkesk=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MTAKNCOMFBFB5ND7G7SMSBOKHU.jpg",
 	},
@@ -55,7 +56,7 @@ const products: ProductProps[] = [
 		name: "Guitarra",
 		brand: "Brand",
 		price: 999,
-		slug: "",
+		id: 1,
 		img_url:
 			"https://www.el-atril.com/orquesta/Instrumentos/imagenes/guitarra.jpg",
 	},
@@ -63,52 +64,72 @@ const products: ProductProps[] = [
 		name: "Zapatos",
 		brand: "Brand",
 		price: 999,
-		slug: "",
+		id: 1,
 		img_url:
 			"https://gestion.pe/resizer/CNx8YN7g4JT40BmznY5bZVWkesk=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MTAKNCOMFBFB5ND7G7SMSBOKHU.jpg",
 	},
-];
-
-const Products = () => {
-	return (
-		<Container maxW="container.lg" pt={"16"}>
-			<div className="w-full mt-12">
-				<Heading className="mb-2">Productos</Heading>
-				<hr className="mb-12" />
-				<Grid templateColumns="repeat(3, 1fr)" gap={8}>
-					{products.map((element, i) => {
-						return (
-							<GridItem key={i}>
-								<Product
-									name={element.name}
-									img_url={element.img_url}
-									brand={element.brand}
-									price={element.price}
-									slug={element.slug}
-								/>
-							</GridItem>
-						);
-					})}
-				</Grid>
-			</div>
-			<div className="w-full flex items-center justify-center mt-24">
-				<Pagination />
-			</div>
-		</Container>
-	);
-};
-
+];*/
 interface ProductProps {
+	id: number;
 	name: string;
 	img_url: string;
 	brand: string;
 	price: number;
-	slug: string;
 }
+interface ProductPropsState {
+	products: ProductProps[];
+}
+const Products = () => {
+	const [state, setState] = useState<ProductPropsState>({ products: [] });
+
+	useEffect(() => {
+		const data = async () => {
+			const response = await fetch("http://localhost:8000/api/items");
+			const products = await response.json();
+			setState({ products: products });
+		};
+
+		data();
+	}, []);
+
+	return (
+		<>
+			{" "}
+			{state.products ? (
+				<Container maxW="container.lg" pt={"16"}>
+					<div className="w-full mt-12">
+						<Heading className="mb-2">Productos</Heading>
+						<hr className="mb-12" />
+						<Grid templateColumns="repeat(3, 1fr)" gap={8}>
+							{state.products.map((element, i) => {
+								return (
+									<GridItem key={i}>
+										<Product
+											id={element.id}
+											name={element.name}
+											img_url={element.img_url}
+											brand={element.brand}
+											price={element.price}
+										/>
+									</GridItem>
+								);
+							})}
+						</Grid>
+					</div>
+					<div className="w-full flex items-center justify-center mt-24">
+						<Pagination />
+					</div>
+				</Container>
+			) : (
+				<div>Cargando</div>
+			)}
+		</>
+	);
+};
 
 const Product = (props: ProductProps) => {
 	return (
-		<Link to={`/product/${props.slug}`}>
+		<Link to={`/product/${props.id}`}>
 			<div className="bg-white rounded-lg shadow-md hover:scale-105">
 				<img
 					className="w-96 h-60 object-cover"
