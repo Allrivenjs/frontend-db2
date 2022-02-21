@@ -2,19 +2,7 @@ import { createBreakpoints } from "@chakra-ui/theme-tools";
 
 const theme = {
 	styles: {
-		global: {
-			"html, body": {
-				fontFamily: "Inter, sans-serif",
-				bg: "base.d400",
-				color: "gray.200",
-				h: "full"
-			},
-			"#root": {
-				alignItems: "center",
-				display: "flex",
-				h: "full"
-			}
-		}
+
 	},
 	breakpoints: createBreakpoints({
 		xs: "30em",
@@ -38,7 +26,7 @@ const theme = {
 			900: "#263238",
 			d100: "#171F23",
 			d200: "#12181B",
-			d400: "#0D1214",
+			// d400: "#0D1214",
 			d700: "#080C0D"
 		}
 	},
