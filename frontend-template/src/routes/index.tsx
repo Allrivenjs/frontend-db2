@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../components/Layout";
+import Layout2 from "../components/Layout2";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
@@ -13,12 +14,16 @@ const Router = () => {
 		<BrowserRouter>
 			<Routes>
 				<Route element={<Layout />}>
-					<Route path="/" element={<Home />} />
+					<Route path="/home" element={<Home />} />
 					<Route path="/products" element={<Products />} />
 					<Route path="/product/:id" element={<Product />} />
+					<Route path="/cart" element={<Cart />} />
+				</Route>
+
+				<Route element={<Layout2 />}>
+					<Route path="/" element={<Login />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
-					<Route path="/cart" element={<Cart />} />
 				</Route>
 
 				<Route path="*" element={<NotFound />} />

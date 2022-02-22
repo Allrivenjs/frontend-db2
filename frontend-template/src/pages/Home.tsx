@@ -4,6 +4,7 @@ import Merch from "../components/merch";
 interface Productito {
 	nombre: string;
 	URL: string;
+	categoria: string;
 }
 
 interface ProductitoState {
@@ -50,38 +51,24 @@ const Home = () => {
 						<hr className="border border-gray-300 w-11/12" />
 
 						<div className="grid grid-cols-3">
-							<Merch
-								name={"Sueter"}
-								image={
-									"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
+							{state.data.map((e, i) => {
+								if (
+									e.categoria
+										.toLowerCase()
+										.includes("botas") ||
+									e.categoria
+										.toLowerCase()
+										.includes("zapatos")
+								) {
+									return (
+										<Merch
+											key={i}
+											name={e.nombre}
+											image={e.URL}
+										/>
+									);
 								}
-								desc={"Con mangas"}
-								color={"Negro"}
-							/>
-							<Merch
-								name={"Sueter"}
-								image={
-									"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-								}
-								desc={"Con mangas"}
-								color={"Negro"}
-							/>
-							<Merch
-								name={"Sueter"}
-								image={
-									"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-								}
-								desc={"Con mangas"}
-								color={"Negro"}
-							/>
-							<Merch
-								name={"Sueter"}
-								image={
-									"https://cdn.koaj.co/3297-big_default/sueter-nergro-franjas.jpg"
-								}
-								desc={"Con mangas"}
-								color={"Negro"}
-							/>
+							})}
 						</div>
 					</section>
 				</div>

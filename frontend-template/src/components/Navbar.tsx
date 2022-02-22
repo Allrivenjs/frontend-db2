@@ -1,8 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiUser } from "react-icons/fi";
-import logo from "../assets/logo.png"
+import logo from "../assets/logo.png";
+import { useState } from "react";
+import { useCookies } from "react-cookie";
 
 const Navbar = () => {
+	const [state, setState] = useState(false);
+	const [cookies, , delCookies] = useCookies(["user"]);
+	const navigate = useNavigate();
+	const logout = async () => {
+		//e.preventDefault();
+		console.log(cookies.user.id);
+		
+		await fetch("http://localhost:8000/api/logout/" + cookies.user.id)
+			.then((respuesta) => respuesta)
+			.then((res) => {
+				console.log(res);
+				delCookies("user");
+				navigate("/");
+			})
+			.catch(console.log);
+	};
+
 	return (
 		<div className="w-full h-24 bg-white shadow-md flex flex-col justify-between fixed z-50 ">
 			<div className="w-full h-full flex items-center justify-between bg-[#B2A3D1] px-4">
@@ -32,7 +51,25 @@ const Navbar = () => {
 				</div>
 				<div className="flex items-center h-full">
 					<div className="bg-white rounded-lg px-2">
-						<div className="flex items-center gap-x-2"><FiUser></FiUser><p>Usuario</p></div>
+						<div
+							className="flex items-center gap-x-2"
+							onMouseEnter={() => setState(true)}
+							onMouseLeave={() => setState(false)}
+						>
+							<FiUser></FiUser>
+							<p>Usuario</p>
+							<div
+								className={
+									state
+										? "bg-white p-2 mt-16 right-0.5 absolute rounded-lg"
+										: "hidden"
+								}
+							>
+								<button onClick={() => logout()}>
+									Cerrar Sesion
+								</button>
+							</div>
+						</div>
 					</div>
 
 					{/* <nav className="mt-1">
@@ -56,7 +93,7 @@ const Navbar = () => {
 					<nav className="mt-1 flex gap-x-8">
 						<Link
 							className="hover:underline text-white mr-3 text-sm"
-							to="/"
+							to="/home"
 						>
 							Inicio
 						</Link>
@@ -68,37 +105,39 @@ const Navbar = () => {
 						</Link>
 						<Link
 							className="hover:underline text-white mr-3 text-sm"
-							to="/"
+							to="/products"
 						>
 							T-Shirts
 						</Link>
 						<Link
 							className="hover:underline text-white mr-3 text-sm"
-							to="/"
+							to="/products"
 						>
 							Troussers
 						</Link>
 						<Link
 							className="hover:underline text-white mr-3 text-sm"
-							to="/"
+							to="/products"
 						>
 							Shoes
 						</Link>
 					</nav>
-					<Link to="/cart"><div className="flex bg-[#C4C4C4] rounded-lg px-2">
-						<p>Carrito</p>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-							className="ml-2"
-						>
-							<path d="M21.822 7.431A1 1 0 0 0 21 7H7.333L6.179 4.23A1.994 1.994 0 0 0 4.333 3H2v2h2.333l4.744 11.385A1 1 0 0 0 10 17h8c.417 0 .79-.259.937-.648l3-8a1 1 0 0 0-.115-.921z" />
-							<circle cx="10.5" cy="19.5" r="1.5" />
-							<circle cx="17.5" cy="19.5" r="1.5" />
-						</svg>
-					</div></Link>
+					<Link to="/cart">
+						<div className="flex bg-[#C4C4C4] rounded-lg px-2">
+							<p>Carrito</p>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								className="ml-2"
+							>
+								<path d="M21.822 7.431A1 1 0 0 0 21 7H7.333L6.179 4.23A1.994 1.994 0 0 0 4.333 3H2v2h2.333l4.744 11.385A1 1 0 0 0 10 17h8c.417 0 .79-.259.937-.648l3-8a1 1 0 0 0-.115-.921z" />
+								<circle cx="10.5" cy="19.5" r="1.5" />
+								<circle cx="17.5" cy="19.5" r="1.5" />
+							</svg>
+						</div>
+					</Link>
 				</div>
 			</div>
 		</div>

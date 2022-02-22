@@ -11,6 +11,7 @@ import {
 	Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -20,6 +21,8 @@ interface LoginUserState {
 }
 
 const Login = () => {
+	const [cookies, setCookies] = useCookies(["user"]);
+
 	const navigate = useNavigate();
 
 	const [loading, setLoading] = useState(false);
@@ -48,13 +51,11 @@ const Login = () => {
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(datosEnviar),
 		})
-			.then((respuesta) => {
-				if(respuesta.status===200){
-					navigate("/");
-				}else{
-					console.log("no");
-					
-				}
+			.then((respuesta) => respuesta.json())
+			.then((res) => {
+				console.log(res);
+				setCookies("user", res[0]);
+				navigate("/home")
 			})
 			.catch(console.log);
 	};
@@ -79,7 +80,7 @@ const Login = () => {
 						<Stack spacing={4}>
 							<FormControl id="text">
 								<FormLabel htmlFor="text">
-									Correo electronico
+									Nombre de usuario
 								</FormLabel>
 								<Input
 									onChange={handleOnChangeInput}

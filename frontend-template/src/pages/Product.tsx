@@ -1,8 +1,9 @@
-import { Container, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 import { FiPlus, FiMinus } from "react-icons/fi";
 import { useParams } from "react-router-dom";
+import { useToast } from '@chakra-ui/react'
 
 interface product {
 	nombre: string;
@@ -11,8 +12,8 @@ interface product {
 	precio: number;
 	dimensiones: string;
 	URL: string;
-	peso: number,
-	stock: number
+	peso: number;
+	stock: number;
 }
 
 const Product = () => {
@@ -20,8 +21,36 @@ const Product = () => {
 
 	const [counter, setCounter] = useState<number>(1);
 	const [product, setProduct] = useState<product>();
+	const [cookies] = useCookies(["user"]);
+	const toast = useToast()
 
 	const addCounter = () => setCounter(counter + 1);
+
+	const addItem = async () => {
+		const datosEnviar = {
+			idProduct: params.id,
+			idSesion: cookies.user.id_sesion,
+			cantidad: counter,
+		};
+		
+		await fetch("http://localhost:8000/api/addItem", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(datosEnviar),
+		})
+			.then((res) => res)
+			.then((res) => {
+				console.log(res);
+				toast({
+					title: 'Item Agregado.',
+					description: "El producto ha sido agregado al carrito",
+					status: 'success',
+					duration: 9000,
+					isClosable: true,
+				  })
+			})
+			.catch(console.log);
+	};
 
 	const substractCounter = () => {
 		setCounter(counter - 1);
@@ -35,7 +64,6 @@ const Product = () => {
 			);
 			const producto = await response.json();
 			setProduct(producto[0]);
-			
 		};
 		data();
 	}, []);
@@ -98,6 +126,7 @@ const Product = () => {
 							</div>
 							<div className="mt-6">
 								<button
+									onClick={() => addItem()}
 									id="add-to-cart-btn"
 									className="hover:underline text-white mr-3 text-sm bg-blue-500 px-3 py-2 rounded-md font-bold hover:bg-blue-600 transition-colors"
 								>
