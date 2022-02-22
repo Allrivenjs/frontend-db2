@@ -6,23 +6,25 @@ import NotFound from "../pages/NotFound";
 import Product from "../pages/Product";
 import Products from "../pages/Products";
 import Register from "../pages/Register";
+import Cart from "../pages/Cart";
 
 const Router = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-				<Route element={<Layout />} >
-                	<Route path="/" element={<Home />} />
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route element={<Layout />}>
+					<Route path="/" element={<Home />} />
 					<Route path="/products" element={<Products />} />
 					<Route path="/product/:id" element={<Product />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
+					<Route path="/cart" element={<Cart />} />
 				</Route>
 
 				<Route path="*" element={<NotFound />} />
-            </Routes>
-        </BrowserRouter>
-    );
+			</Routes>
+		</BrowserRouter>
+	);
 };
 
 export default Router;

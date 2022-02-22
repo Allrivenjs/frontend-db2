@@ -85,8 +85,8 @@ const Navbar = () => {
 							Shoes
 						</Link>
 					</nav>
-					<div className="flex bg-[#C4C4C4] rounded-lg px-2">
-						<a href="">Carrito</a>
+					<Link to="/cart"><div className="flex bg-[#C4C4C4] rounded-lg px-2">
+						<p>Carrito</p>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="24"
@@ -98,7 +98,7 @@ const Navbar = () => {
 							<circle cx="10.5" cy="19.5" r="1.5" />
 							<circle cx="17.5" cy="19.5" r="1.5" />
 						</svg>
-					</div>
+					</div></Link>
 				</div>
 			</div>
 		</div>
