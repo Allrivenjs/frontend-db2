@@ -2,73 +2,7 @@ import { Container, Grid, GridItem, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../components/shared/Pagination";
-/*
-const products: ProductProps[] = [
-	{
-		name: "Guitarra",
-		brand: "Brand",
-		price: 999,
-		id: 1,
-		img_url:
-			"https://www.el-atril.com/orquesta/Instrumentos/imagenes/guitarra.jpg",
-	},
-	{
-		name: "Zapatos",
-		brand: "Brand",
-		price: 999,
-		id: 1,
-		img_url:
-			"https://gestion.pe/resizer/CNx8YN7g4JT40BmznY5bZVWkesk=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MTAKNCOMFBFB5ND7G7SMSBOKHU.jpg",
-	},
-	{
-		name: "Guitarra",
-		brand: "Brand",
-		price: 999,
-		id: 1,
-		img_url:
-			"https://www.el-atril.com/orquesta/Instrumentos/imagenes/guitarra.jpg",
-	},
-	{
-		name: "Zapatos",
-		brand: "Brand",
-		price: 999,
-		id: 1,
-		img_url:
-			"https://gestion.pe/resizer/CNx8YN7g4JT40BmznY5bZVWkesk=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MTAKNCOMFBFB5ND7G7SMSBOKHU.jpg",
-	},
-	{
-		name: "Guitarra",
-		brand: "Brand",
-		price: 999,
-		id: 1,
-		img_url:
-			"https://www.el-atril.com/orquesta/Instrumentos/imagenes/guitarra.jpg",
-	},
-	{
-		name: "Zapatos",
-		brand: "Brand",
-		price: 999,
-		id: 1,
-		img_url:
-			"https://gestion.pe/resizer/CNx8YN7g4JT40BmznY5bZVWkesk=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MTAKNCOMFBFB5ND7G7SMSBOKHU.jpg",
-	},
-	{
-		name: "Guitarra",
-		brand: "Brand",
-		price: 999,
-		id: 1,
-		img_url:
-			"https://www.el-atril.com/orquesta/Instrumentos/imagenes/guitarra.jpg",
-	},
-	{
-		name: "Zapatos",
-		brand: "Brand",
-		price: 999,
-		id: 1,
-		img_url:
-			"https://gestion.pe/resizer/CNx8YN7g4JT40BmznY5bZVWkesk=/980x0/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/MTAKNCOMFBFB5ND7G7SMSBOKHU.jpg",
-	},
-];*/
+
 interface ProductProps {
 	id: number;
 	name: string;
@@ -94,7 +28,6 @@ const Products = () => {
 
 	return (
 		<>
-			{" "}
 			{state.products ? (
 				<Container maxW="container.lg" pt={"16"}>
 					<div className="w-full mt-12">

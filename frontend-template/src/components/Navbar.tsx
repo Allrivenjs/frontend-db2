@@ -9,7 +9,6 @@ const Navbar = () => {
 	const [cookies, , delCookies] = useCookies(["user"]);
 	const navigate = useNavigate();
 	const logout = async () => {
-		//e.preventDefault();
 		console.log(cookies.user.id);
 		
 		await fetch("http://localhost:8000/api/logout/" + cookies.user.id)
