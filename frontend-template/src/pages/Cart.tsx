@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import { useCookies } from "react-cookie";
 import { useToast } from "@chakra-ui/react";
@@ -22,6 +22,7 @@ const Cart = () => {
 	const [state, setState] = useState<CarritoState>({ carrito: [] });
 	const [cookies] = useCookies(["user"]);
 	const toast = useToast();
+	const navigate = useNavigate();
 	useEffect(() => {
 		const data = async () => {
 			const response = await fetch(
@@ -48,7 +49,7 @@ const Cart = () => {
 			.then((res) => res)
 			.then((res) => {
 				console.log(res);
-				
+
 				const data = async () => {
 					const response = await fetch(
 						"http://localhost:8000/api/carrito/" + cookies.user.id
@@ -60,12 +61,32 @@ const Cart = () => {
 
 				data();
 				toast({
-					title: 'Eliminado.',
-					description: "El item ha sido eliminado del carrito con exito",
-					status: 'success',
+					title: "Eliminado.",
+					description:
+						"El item ha sido eliminado del carrito con exito",
+					status: "success",
 					duration: 9000,
 					isClosable: true,
-				  });
+				});
+			})
+			.catch(console.log);
+	};
+
+	const comprar = async () => {
+		await fetch(`http://localhost:8000/api/comprar/${cookies.user.id}`, {
+			method: "POST",
+		})
+			.then((res) => res)
+			.then((res) => {
+				toast({
+					title: "¡Comprado!",
+					description:
+						"Se ha comprado el carrito",
+					status: "success",
+					duration: 9000,
+					isClosable: true,
+				});
+				navigate("/home")
 			})
 			.catch(console.log);
 	};
@@ -129,7 +150,10 @@ const Cart = () => {
 									>
 										Cancelar
 									</Link>
-									<button className="text-base h-12 w-full py-2 bg-[#62FF5F] font-semibold rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">
+									<button
+										onClick={() => comprar()}
+										className="text-base h-12 w-full py-2 bg-[#62FF5F] font-semibold rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
+									>
 										Comprar
 									</button>
 								</div>

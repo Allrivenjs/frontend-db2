@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useCookies } from "react-cookie";
 
 import { Link, useNavigate } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
 
 interface LoginUserState {
 	email: string;
@@ -22,11 +23,10 @@ interface LoginUserState {
 
 const Login = () => {
 	const [cookies, setCookies] = useCookies(["user"]);
-
 	const navigate = useNavigate();
-
 	const [loading, setLoading] = useState(false);
-
+	const toast = useToast();
+	
 	const [user, setUser] = useState<LoginUserState>({
 		email: "",
 		password: "",
@@ -55,27 +55,45 @@ const Login = () => {
 			.then((res) => {
 				console.log(res);
 				setCookies("user", res[0]);
-				navigate("/home")
+				navigate("/home");
 			})
-			.catch(console.log);
+			.catch(()=>{
+				toast({
+					title: "Ha ocurrido un error",
+					status: "error",
+					description: "Es posible que las credenciales estén erroneas",
+					isClosable: true,
+					duration: 9000,
+
+				});
+			});
 	};
 
 	return (
 		<Flex minH={"100vh"} align={"center"} justify={"center"}>
-			<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+			<Stack
+				spacing={8}
+				mx={"auto"}
+				maxW={"lg"}
+				rounded={"3xl"}
+				py={12}
+				px={6}
+				className=" bg-gradient-to-bl from-[#706CA8] to-[#C1A4FF]"
+			>
+				{" "}
 				<Stack align={"center"}>
-					<Heading fontSize={"4xl"}>
+					<Heading fontSize={"4xl"} color={"white"}>
 						Inicia sesión en tu cuenta
 					</Heading>
-					<Text fontSize={"lg"} color={"gray.600"}>
+					<Text fontSize={"lg"} color={"white"}>
 						o si aun no tienes cuenta,{" "}
-						<Link to={"/register"} className="text-blue-400">
+						<Link to={"/register"} className="text-blue-200">
 							registrate
 						</Link>{" "}
 						✌️
 					</Text>
 				</Stack>
-				<Box rounded={"lg"} bg={"white"} boxShadow={"lg"} p={8}>
+				<Box rounded={"lg"} boxShadow={"lg"} p={8} className="">
 					<form onSubmit={handleOnSubmitForm}>
 						<Stack spacing={4}>
 							<FormControl id="text">
@@ -117,10 +135,10 @@ const Login = () => {
 								<Button
 									isDisabled={loading}
 									type="submit"
-									bg={"blue.400"}
+									bg={"#816CA8"}
 									color={"white"}
 									_hover={{
-										bg: "blue.500",
+										bg: "#614C88",
 									}}
 								>
 									{loading ? (
