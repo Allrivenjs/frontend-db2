@@ -1,5 +1,5 @@
 {
-  "name": "frontend-template",
+  "name": "wintmerch",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -14,9 +14,13 @@
     "@emotion/styled": "^11.8.1",
     "framer-motion": "^6.2.6",
     "react": "^17.0.2",
+    "react-cookie": "^4.1.1",
+    "react-cookies": "^0.1.1",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
-    "react-router-dom": "^6.2.1"
+    "react-router-dom": "^6.2.1",
+    "sweetalert2": "^11.4.4",
+    "sweetalert2-react-content": "^4.2.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",
